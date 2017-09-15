@@ -30,12 +30,12 @@ load_rc_config $name
 : ${prometheus_enable:="NO"}
 : ${prometheus_user:="<%= scope.lookupvar('prometheus::user') %>"}
 : ${prometheus_group:="<%= scope.lookupvar('prometheus::group') %>"}
-: ${prometheus_config:="<%= scope.lookupvar('prometheus::config_dir')+'/prometheus.yml' %>"}
+: ${prometheus_config:="<%= scope.lookupvar('prometheus::config_dir')+'/prometheus.yaml' %>"}
 : ${prometheus_data_dir:="<%= scope.lookupvar('prometheus::localstorage') %>"}
-: ${prometheus_log_file:="/var/log/<%= @name %>.log"}
+: ${prometheus_log_file:="/var/log/prometheus.log"}
 : ${prometheus_args:=""}
 
-pidfile=/var/run/<%= @name %>.pid
+pidfile=/var/run/prometheus.pid
 required_files="${prometheus_config}"
 command="/usr/sbin/daemon"
 procname="<%= scope.lookupvar('prometheus::bin_dir') %>/prometheus"

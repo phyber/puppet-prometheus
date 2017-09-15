@@ -145,6 +145,16 @@ define prometheus::daemon (
           notify  => $notify_service,
         }
       }
+      'freebsd': {
+        file { "/usr/local/etc/rc.d/${name}":
+          ensure  => file,
+          owner   => 'root',
+          group   => 'wheel',
+          mode    => '0555',
+          content => template('prometheus/daemon.freebsd.erb'),
+          notify  => $notify_service,
+        }
+      }
       default : {
         fail("I don't know how to create an init script for style ${init_style}")
       }

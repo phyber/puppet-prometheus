@@ -84,6 +84,15 @@ class prometheus::config(
           content => template('prometheus/prometheus.launchd.erb'),
         }
       }
+      'freebsd': {
+        file { '/usr/local/etc/rc.d/prometheus':
+          ensure  => file,
+          owner   => 'root',
+          group   => 'root',
+          mode    => '0555',
+          content => template('prometheus/prometheus.freebsd.erb'),
+        }
+      }
       default : {
         fail("I don't know how to create an init script for style ${prometheus::init_style}")
       }
